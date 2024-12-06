@@ -21,8 +21,14 @@ fn main() {
 
     let result: i32 = left
         .iter()
-        .zip(right)
-        .fold(0, |acc, n| acc + n.0.abs_diff(n.1) as i32);
+        .zip(&right)
+        .fold(0, |acc, n| acc + n.0.abs_diff(*n.1) as i32);
+
+    println!("{}", result);
+
+    let result: i32 = left.iter().fold(0, |acc, l| {
+        acc + l * right.iter().filter(|r| *r == l).count() as i32
+    });
 
     println!("{}", result);
 }
